@@ -17,6 +17,7 @@ export const databaseProviders = [
           paranoid: true,
         },
       });
+
       try {
         await sequelize.authenticate();
         return sequelize;
