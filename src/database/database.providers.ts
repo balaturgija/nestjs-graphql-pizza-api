@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 
+import { PizzaEntity } from '~modules/pizzas';
+
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
@@ -11,7 +13,7 @@ export const databaseProviders = [
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
-        models: [],
+        models: [PizzaEntity],
         define: {
           underscored: true,
           paranoid: true,
