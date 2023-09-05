@@ -16,6 +16,13 @@ export class PizzasService {
   }
 
   async update(filter: FilterPizza, input: UpdatePizzaDto) {
-    return this.pizzasRepository.update(filter, input);
+    await this.pizzasRepository.update(filter, input);
+    return await this.pizzasRepository.getByFilter(filter);
+  }
+
+  async remove(filter: FilterPizza) {
+    const result = await this.pizzasRepository.getByFilter(filter);
+    await this.pizzasRepository.remove(filter);
+    return result;
   }
 }

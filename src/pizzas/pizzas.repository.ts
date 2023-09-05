@@ -14,6 +14,16 @@ export class PizzasRepository {
   }
 
   async update(filter: FilterPizza, input: UpdatePizzaDto) {
-    return await PizzaEntity.update({ ...input }, { where: { ...filter } });
+    return (
+      (await PizzaEntity.update({ ...input }, { where: { ...filter } })[0]) > 1
+    );
+  }
+
+  async getByFilter(filter: FilterPizza) {
+    return await PizzaEntity.findOne({ where: { ...filter } });
+  }
+
+  async remove(filter: FilterPizza) {
+    return await PizzaEntity.destroy({ where: { ...filter } });
   }
 }

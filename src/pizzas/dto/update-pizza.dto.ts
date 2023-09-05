@@ -4,6 +4,8 @@ import { CreatePizzaDto } from './create-pizza.dto';
 
 @InputType()
 export class FilterPizza {
+  static readonly KEY = 'filterPizza';
+
   @Field({ nullable: true })
   readonly id: string;
 

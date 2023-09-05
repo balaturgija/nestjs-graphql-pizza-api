@@ -1,7 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { UpdatePizzaDto } from './dto';
-import { CreatePizzaDto } from './dto/create-pizza.dto';
+import { CreatePizzaDto, FilterPizza, UpdatePizzaDto } from './dto';
 import { Pizza } from './model';
 import { PizzasService } from './pizzas.service';
 
@@ -27,5 +26,10 @@ export class PizzasResolver {
       updatePizzaDto.filter,
       updatePizzaDto,
     );
+  }
+
+  @Mutation(() => Pizza)
+  async remove(@Args(FilterPizza.KEY) filter: FilterPizza) {
+    return await this.pizzasService.remove(filter);
   }
 }
