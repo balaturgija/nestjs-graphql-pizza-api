@@ -1,0 +1,23 @@
+
+# Create
+mutation {
+	create(createPizzaDto: {name: "Capricciosa"}) {name}
+}
+
+# Get
+query {
+  getById(id: "") {
+    id
+    name
+  }
+}
+
+# Update
+mutation {
+	update(updatePizzaDto: {filter: {id: ""} name: "Napilitana"}) {id name}
+}
+
+# Delete
+mutation {
+	remove(filterPizza: {id: ""}) {name}
+}

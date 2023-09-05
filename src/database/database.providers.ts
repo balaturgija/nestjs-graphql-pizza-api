@@ -1,4 +1,8 @@
+import { join } from 'path';
 import { Sequelize } from 'sequelize-typescript';
+import { SequelizeTypescriptMigration } from 'sequelize-typescript-migration-lts';
+
+import { PizzaEntity } from '~modules/pizzas';
 
 export const databaseProviders = [
   {
@@ -11,13 +15,18 @@ export const databaseProviders = [
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
-        models: [],
+        models: [PizzaEntity],
         define: {
           underscored: true,
           paranoid: true,
         },
       });
-
+      await SequelizeTypescriptMigration.makeMigration(sequelize, {
+        outDir: join(process.cwd(), '/src/database/migrations'),
+        migrationName: 'migration',
+        preview: false,
+        useSnakeCase: true,
+      });
       try {
         await sequelize.authenticate();
         return sequelize;
