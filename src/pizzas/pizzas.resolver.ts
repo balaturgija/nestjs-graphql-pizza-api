@@ -9,9 +9,7 @@ export class PizzasResolver {
   constructor(private readonly pizzasService: PizzasService) {}
 
   @Mutation(() => Pizza)
-  protected async create(
-    @Args(CreatePizzaDto.KEY) createPizzaDto: CreatePizzaDto,
-  ) {
+  async create(@Args(CreatePizzaDto.KEY) createPizzaDto: CreatePizzaDto) {
     return await this.pizzasService.create(createPizzaDto);
   }
 

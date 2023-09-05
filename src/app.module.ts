@@ -10,6 +10,7 @@ import { PizzasModule } from '~modules/pizzas';
 import { AppController } from './app.controller';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AppService } from './app.service';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      installSubscriptionHandlers: true,
       // code first aproach
       // dynamic
       // autoSchemaFile: true,
@@ -29,6 +31,7 @@ import { AppService } from './app.service';
     }),
     DatabaseModule,
     PizzasModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
