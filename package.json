@@ -21,7 +21,7 @@
     "db:create": "npx sequelize-cli db:create",
     "db:drop": "npx sequelize-cli db:drop",
     "migrate:up": "npx sequelize-cli db:migrate",
-    "migrate:down": "npx sequelize-cli db:mugrate:undo"
+    "migrate:down": "npx sequelize-cli db:migrate:undo"
   },
   "dependencies": {
     "@apollo/server": "4.9.3",

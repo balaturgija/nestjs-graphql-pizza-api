@@ -3,7 +3,7 @@ import { IsString } from 'class-validator';
 
 @ArgsType()
 export class PizzaArgs {
-  @Field((type) => String)
+  @Field(() => String)
   @IsString()
   name: string;
 }
