@@ -1,0 +1,13 @@
+
+#create
+mutation {
+	create(createPizzaDto: {name: "Napolitana"}) {name}
+}
+
+#get
+query {
+  getById(id: "") {
+    id
+    name
+  }
+}

@@ -3,14 +3,18 @@ import { DataTypes } from 'sequelize';
 import {
   AllowNull,
   Column,
+  CreatedAt,
+  DeletedAt,
   IsUUID,
   Model,
   PrimaryKey,
   Table,
+  UpdatedAt,
 } from 'sequelize-typescript';
 
 @Table({
   tableName: 'pizzas',
+  freezeTableName: true,
   underscored: true,
   createdAt: true,
   updatedAt: true,
@@ -33,4 +37,13 @@ export class PizzaEntity extends Model<PizzaEntity> {
     type: DataTypes.TEXT,
   })
   name: string;
+
+  @CreatedAt
+  createdAt?: Date;
+
+  @UpdatedAt
+  updatedAt?: Date;
+
+  @DeletedAt
+  deletedAt?: Date;
 }
