@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { ExtractJwt } from 'passport-jwt';
 
 @Injectable()
 export class SupabaseService {
@@ -9,7 +8,7 @@ export class SupabaseService {
 
   constructor(private readonly configService: ConfigService) {
     this.client = createClient(
-      configService.get('SUPABASE_URL'),
+      configService.get('SUPABASE_PROJECT_URL'),
       configService.get('SUPABASE_API_KEY'),
       { auth: { persistSession: false } },
     );

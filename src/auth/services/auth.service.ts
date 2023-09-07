@@ -1,8 +1,5 @@
-import {
-  HttpException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { AuthError } from '@supabase/supabase-js';
 
 import { SupabaseService } from './supabase.service';
 
@@ -11,8 +8,6 @@ export class AuthService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
   async login(email: string, password: string) {
-    await this.supabaseService.getClient();
-
     const { data, error } =
       await this.supabaseService.client.auth.signInWithPassword({
         email,
@@ -20,7 +15,7 @@ export class AuthService {
       });
 
     if (data.session) {
-      return data.session;
+      return { token: data.session.access_token };
     }
 
     if (error) {
@@ -31,20 +26,17 @@ export class AuthService {
   }
 
   async register(email: string, password: string) {
-    await this.supabaseService.getClient();
-
     const { data, error } = await this.supabaseService.client.auth.signUp({
       email,
       password,
     });
 
     if (data.session) {
-      return data.session.access_token;
+      return { token: data.session.access_token };
     }
 
     if (error) {
-      return error;
-      // throw new HttpException({ message: 'Registration fail' }, 400);
+      throw new AuthError(error.message, error.status);
     }
   }
 }

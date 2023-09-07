@@ -21,13 +21,11 @@ import { AuthModule } from './auth/auth.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       installSubscriptionHandlers: true,
-      // code first aproach
-      // dynamic
       // autoSchemaFile: true,
-      // generate file
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       playground: true,
+      // path: 'https://localhost:3000/graphql',
     }),
     DatabaseModule,
     PizzasModule,
