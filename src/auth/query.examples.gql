@@ -1,0 +1,10 @@
+
+# Register
+mutation {
+	create(registerDto: {email: "matej.balat@prototyp.digital", password: "matej123"}) {token}
+}
+
+# Login
+mutation {
+  login(loginDto: {email: "matej.balat@prototyp.digital", password: "matej123"}) {token}
+}
