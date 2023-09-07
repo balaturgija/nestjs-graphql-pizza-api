@@ -1,8 +1,8 @@
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class LoginDto {
-  static readonly KEY = 'loginDto';
+export class RegisterInputDto {
+  static readonly KEY = 'registerDto';
 
   @Field()
   email: string;
