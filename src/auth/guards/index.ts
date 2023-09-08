@@ -1,1 +1,1 @@
-export * from './supabase.guard';
+export * from './supabase-auth.guard';

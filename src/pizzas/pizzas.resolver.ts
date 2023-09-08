@@ -1,5 +1,9 @@
+import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CurrentUser } from 'src/auth/decorators/auth-user.decorator';
+import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
 
+// import { SupabaseAuthGuard } from '~modules/auth';
 import { CreatePizzaDto, FilterPizza, UpdatePizzaDto } from './dto';
 import { Pizza } from './model';
 import { PizzasService } from './pizzas.service';
@@ -9,7 +13,12 @@ export class PizzasResolver {
   constructor(private readonly pizzasService: PizzasService) {}
 
   @Mutation(() => Pizza)
-  async create(@Args(CreatePizzaDto.KEY) createPizzaDto: CreatePizzaDto) {
+  @UseGuards(GqlAuthGuard)
+  async create(
+    @Args(CreatePizzaDto.KEY) createPizzaDto: CreatePizzaDto,
+    @CurrentUser() user: any,
+  ) {
+    console.log(user);
     return await this.pizzasService.create(createPizzaDto);
   }
 

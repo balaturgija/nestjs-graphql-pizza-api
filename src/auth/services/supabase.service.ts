@@ -10,11 +10,7 @@ export class SupabaseService {
     this.client = createClient(
       configService.get('SUPABASE_PROJECT_URL'),
       configService.get('SUPABASE_API_KEY'),
-      { auth: { persistSession: false } },
+      { auth: { persistSession: false, autoRefreshToken: true } },
     );
-  }
-
-  async getClient() {
-    console.log(this.client);
   }
 }
